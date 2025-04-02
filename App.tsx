@@ -61,7 +61,8 @@ function App(): React.JSX.Element {
                 fontFamily: 'Roboto',
                 fontWeight: '400',
                 fontSize: 20,
-            }} placeholder={"Search..."} />
+                color: 'black',
+            }} placeholder={"Search..."} placeholderTextColor={"red"} />
         </View>
           <View
               style={{
@@ -78,7 +79,8 @@ function App(): React.JSX.Element {
                   fontFamily: 'Roboto',
                   fontWeight: '400',
                   fontSize: 20,
-              }} placeholder={"Custom search..."} autoCapitalize={'none'} />
+                  color: 'black',
+              }} placeholder={"Custom search..."} placeholderTextColor={"red"} />
           </View>
           <View
               style={{
@@ -95,7 +97,8 @@ function App(): React.JSX.Element {
                   fontFamily: 'DancingScript',
                   fontWeight: '400',
                   fontSize: 20,
-              }} placeholder={"DancingScript..."} autoCapitalize={'none'} />
+                  color: 'black',
+              }} placeholder={"DancingScript..."} autoCapitalize={'none'} placeholderTextColor={"red"}/>
           </View>
       </ScrollView>
     </View>
