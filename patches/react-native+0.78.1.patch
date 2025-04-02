@@ -1,0 +1,42 @@
+diff --git a/node_modules/react-native/ReactAndroid/src/main/java/com/facebook/react/views/textinput/ReactEditText.java b/node_modules/react-native/ReactAndroid/src/main/java/com/facebook/react/views/textinput/ReactEditText.java
+index a037077..2573aec 100644
+--- a/node_modules/react-native/ReactAndroid/src/main/java/com/facebook/react/views/textinput/ReactEditText.java
++++ b/node_modules/react-native/ReactAndroid/src/main/java/com/facebook/react/views/textinput/ReactEditText.java
+@@ -1298,11 +1298,37 @@ public class ReactEditText extends AppCompatEditText {
+ 
+   @Override
+   public void onDraw(Canvas canvas) {
++    // Clip the canvas to the padding box if overflow is not visible.
+     if (mOverflow != Overflow.VISIBLE) {
+       BackgroundStyleApplicator.clipToPaddingBox(this, canvas);
+     }
+ 
++    // Call the superclass's onDraw method to draw the EditText's default content.
+     super.onDraw(canvas);
++
++    // Check if we need to manually draw the hint with a custom font.
++    if (mFontFamily != null && getText().length() == 0 && !isFocused() && getHint() != null) {
++      // Get the Paint object used for drawing.
++      Paint paint = getPaint();
++
++      // Apply the custom font family, style, and weight to the Paint object.
++      Typeface typeface = ReactTypefaceUtils.applyStyles(
++              paint.getTypeface(), mFontStyle, mFontWeight, mFontFamily, getContext().getAssets());
++      paint.setTypeface(typeface);
++
++      // Store the original hint and text colors.
++      int originalHintColor = getCurrentHintTextColor();
++      int originalTextColor = getCurrentTextColor();
++
++      // Set the text color to the hint color to prevent EditText's default hint drawing.
++      setTextColor(originalHintColor);
++
++      // Manually draw the hint text with the custom font.
++      canvas.drawText(getHint().toString(), getCompoundPaddingLeft(), getBaseline(), paint);
++
++      // Restore the original text color immediately after drawing the hint.
++      setTextColor(originalTextColor);
++    }
+   }
+ 
+   /**
