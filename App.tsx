@@ -59,11 +59,27 @@ function App(): React.JSX.Element {
                 borderWidth: 1,
                 marginBottom: 20,
                 fontFamily: 'Roboto',
-                fontWeight: '400',
                 fontSize: 20,
                 color: 'black',
             }} placeholder={"Search..."} placeholderTextColor={"red"} />
         </View>
+          <View
+              style={{
+                  backgroundColor: isDarkMode ? Colors.black : Colors.white,
+                  paddingHorizontal: safePadding,
+                  paddingTop: safePadding,
+                  paddingBottom: safePadding,
+              }}>
+              <TextInput style={{
+                  height: 60,
+                  borderColor: 'gray',
+                  borderWidth: 1,
+                  marginBottom: 20,
+                  fontFamily: 'Roboto-Regular',
+                  fontSize: 20,
+                  color: 'black',
+              }} placeholder={"Search..."} placeholderTextColor={"red"} />
+          </View>
           <View
               style={{
                   backgroundColor: isDarkMode ? Colors.black : Colors.white,

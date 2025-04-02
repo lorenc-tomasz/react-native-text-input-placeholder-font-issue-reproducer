@@ -1,42 +1,94 @@
+diff --git a/node_modules/react-native/ReactAndroid/src/main/java/com/facebook/react/views/textinput/ReactEditHintTypefaceSpan.java b/node_modules/react-native/ReactAndroid/src/main/java/com/facebook/react/views/textinput/ReactEditHintTypefaceSpan.java
+new file mode 100644
+index 0000000..1a4fb45
+--- /dev/null
++++ b/node_modules/react-native/ReactAndroid/src/main/java/com/facebook/react/views/textinput/ReactEditHintTypefaceSpan.java
+@@ -0,0 +1,23 @@
++package com.facebook.react.views.textinput;
++
++import android.graphics.Typeface;
++import android.text.TextPaint;
++import android.text.style.MetricAffectingSpan;
++
++public class ReactEditHintTypefaceSpan extends MetricAffectingSpan {
++    private final Typeface typeface;
++
++    public ReactEditHintTypefaceSpan(Typeface typeface) {
++        this.typeface = typeface;
++    }
++
++    @Override
++    public void updateDrawState(TextPaint paint) {
++        paint.setTypeface(typeface);
++    }
++
++    @Override
++    public void updateMeasureState(TextPaint paint) {
++        paint.setTypeface(typeface);
++    }
++}
 diff --git a/node_modules/react-native/ReactAndroid/src/main/java/com/facebook/react/views/textinput/ReactEditText.java b/node_modules/react-native/ReactAndroid/src/main/java/com/facebook/react/views/textinput/ReactEditText.java
-index a037077..2573aec 100644
+index a037077..b3fdcb7 100644
 --- a/node_modules/react-native/ReactAndroid/src/main/java/com/facebook/react/views/textinput/ReactEditText.java
 +++ b/node_modules/react-native/ReactAndroid/src/main/java/com/facebook/react/views/textinput/ReactEditText.java
-@@ -1298,11 +1298,37 @@ public class ReactEditText extends AppCompatEditText {
+@@ -21,6 +21,7 @@ import android.os.Bundle;
+ import android.text.Editable;
+ import android.text.InputType;
+ import android.text.Spannable;
++import android.text.SpannableString;
+ import android.text.SpannableStringBuilder;
+ import android.text.Spanned;
+ import android.text.TextPaint;
+@@ -125,9 +126,11 @@ public class ReactEditText extends AppCompatEditText {
+   private boolean mOnKeyPress = false;
+   private TextAttributes mTextAttributes;
+   private boolean mTypefaceDirty = false;
++  private boolean mForceSetTypeFaceOnDraw = false;
+   private @Nullable String mFontFamily = null;
+   private int mFontWeight = ReactConstants.UNSET;
+   private int mFontStyle = ReactConstants.UNSET;
++  private @Nullable Typeface mTypeface = null;
+   private boolean mAutoFocus = false;
+   private boolean mContextMenuHidden = false;
+   private boolean mDidAttachToWindow = false;
+@@ -613,10 +616,17 @@ public class ReactEditText extends AppCompatEditText {
  
-   @Override
-   public void onDraw(Canvas canvas) {
-+    // Clip the canvas to the padding box if overflow is not visible.
-     if (mOverflow != Overflow.VISIBLE) {
+     mTypefaceDirty = false;
+ 
+-    Typeface newTypeface =
++    mTypeface =
+         ReactTypefaceUtils.applyStyles(
+             getTypeface(), mFontStyle, mFontWeight, mFontFamily, getContext().getAssets());
+-    setTypeface(newTypeface);
++    setTypeface(mTypeface);
++
++    // Ensure the hint uses the same typeface
++    if (getHint() != null) {
++      SpannableString hintSpan = new SpannableString(getHint());
++      hintSpan.setSpan(new ReactEditHintTypefaceSpan(mTypeface), 0, hintSpan.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
++      setHint(hintSpan);
++    }
+ 
+     // Match behavior of CustomStyleSpan and enable SUBPIXEL_TEXT_FLAG when setting anything
+     // nonstandard
+@@ -628,6 +638,8 @@ public class ReactEditText extends AppCompatEditText {
+     } else {
+       setPaintFlags(getPaintFlags() & (~Paint.SUBPIXEL_TEXT_FLAG));
+     }
++
++    mForceSetTypeFaceOnDraw = true;
+   }
+ 
+   // VisibleForTesting from {@link TextInputEventsTestCase}.
+@@ -1302,6 +1314,11 @@ public class ReactEditText extends AppCompatEditText {
        BackgroundStyleApplicator.clipToPaddingBox(this, canvas);
      }
  
-+    // Call the superclass's onDraw method to draw the EditText's default content.
-     super.onDraw(canvas);
-+
-+    // Check if we need to manually draw the hint with a custom font.
-+    if (mFontFamily != null && getText().length() == 0 && !isFocused() && getHint() != null) {
-+      // Get the Paint object used for drawing.
-+      Paint paint = getPaint();
-+
-+      // Apply the custom font family, style, and weight to the Paint object.
-+      Typeface typeface = ReactTypefaceUtils.applyStyles(
-+              paint.getTypeface(), mFontStyle, mFontWeight, mFontFamily, getContext().getAssets());
-+      paint.setTypeface(typeface);
-+
-+      // Store the original hint and text colors.
-+      int originalHintColor = getCurrentHintTextColor();
-+      int originalTextColor = getCurrentTextColor();
-+
-+      // Set the text color to the hint color to prevent EditText's default hint drawing.
-+      setTextColor(originalHintColor);
-+
-+      // Manually draw the hint text with the custom font.
-+      canvas.drawText(getHint().toString(), getCompoundPaddingLeft(), getBaseline(), paint);
-+
-+      // Restore the original text color immediately after drawing the hint.
-+      setTextColor(originalTextColor);
++    if (mForceSetTypeFaceOnDraw) {
++      mForceSetTypeFaceOnDraw = false;
++      setTypeface(mTypeface);
 +    }
++
+     super.onDraw(canvas);
    }
  
-   /**
