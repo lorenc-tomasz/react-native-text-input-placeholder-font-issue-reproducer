@@ -78,7 +78,24 @@ function App(): React.JSX.Element {
                   fontFamily: 'Roboto',
                   fontWeight: '400',
                   fontSize: 20,
-              }} placeholder={"Custom search..."} />
+              }} placeholder={"Custom search..."} autoCapitalize={'none'} />
+          </View>
+          <View
+              style={{
+                  backgroundColor: isDarkMode ? Colors.black : Colors.white,
+                  paddingHorizontal: safePadding,
+                  paddingTop: safePadding,
+                  paddingBottom: safePadding,
+              }}>
+              <TextInput style={{
+                  height: 60,
+                  borderColor: 'gray',
+                  borderWidth: 1,
+                  marginBottom: 20,
+                  fontFamily: 'DancingScript',
+                  fontWeight: '400',
+                  fontSize: 20,
+              }} placeholder={"DancingScript..."} autoCapitalize={'none'} />
           </View>
       </ScrollView>
     </View>
