@@ -96,12 +96,31 @@ function App(): React.JSX.Element {
                   paddingTop: safePadding,
                   paddingBottom: safePadding,
               }}>
+            <TextInput style={{
+              height: 60,
+              borderColor: 'gray',
+              borderWidth: 1,
+              marginBottom: 20,
+              fontFamily: 'Roboto',
+              fontWeight: '400',
+              fontSize: 20,
+              color: 'black',
+            }} placeholder={"Search 3 ..."} placeholderTextColor={"red"} />
+            <TextInput style={{
+              height: 60,
+              borderColor: 'gray',
+              borderWidth: 1,
+              marginBottom: 20,
+              fontFamily: 'Roboto-Regular',
+              fontSize: 20,
+              color: 'black',
+            }} placeholder={"Search 4..."} placeholderTextColor={"red"} />
               <CustomTextInput style={{
                   height: 60,
                   borderColor: 'gray',
                   borderWidth: 1,
                   marginBottom: 20,
-                  fontFamily: 'Roboto-Regular',
+                  fontFamily: 'Roboto',
                   fontWeight: '400',
                   fontSize: 20,
                   color: 'black',
