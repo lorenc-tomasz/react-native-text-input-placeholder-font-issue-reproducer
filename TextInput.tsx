@@ -1,6 +1,16 @@
 import React, { forwardRef, useRef, useCallback } from 'react';
 import {Platform, StyleSheet, TextInput, TextInputProps} from 'react-native';
 
+const fontStyleProps = [
+  'fontFamily',
+  'fontWeight',
+  'fontStyle',
+  'fontSize',
+  'fontVariant',
+  'letterSpacing',
+  'lineHeight',
+];
+
 const CustomTextInput = forwardRef<TextInput, TextInputProps>((props, ref) => {
   const inputRef = useRef<TextInput | null>(null);
 
@@ -19,11 +29,15 @@ const CustomTextInput = forwardRef<TextInput, TextInputProps>((props, ref) => {
         // Workaround for Android to apply style before setting placeholder
         // to apply font family correctly
         if (Platform.OS === 'android') {
+          const flattenedStyle = StyleSheet.flatten([{
+            fontFamily: 'Roboto',
+            fontWeight: '400',
+          }, props.style ?? {}]);
+          const onlyFontStyle = Object.fromEntries(
+            Object.entries(flattenedStyle).filter(([key]) => fontStyleProps.includes(key)),
+          );
           node.setNativeProps({
-            style: StyleSheet.flatten([{
-                fontFamily: 'Roboto',
-                fontWeight: '400',
-            }, props.style ?? {}]),
+            style: onlyFontStyle,
           });
         }
       }
