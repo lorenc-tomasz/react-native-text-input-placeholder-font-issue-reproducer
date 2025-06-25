@@ -87,7 +87,7 @@ function App(): React.JSX.Element {
                   fontWeight: '400',
                   fontSize: 20,
                   color: 'black',
-              }} placeholder={"Search..."} placeholderTextColor={"red"} />
+              }} placeholder={"Search autoCapitalize..."} placeholderTextColor={"red"} autoCapitalize={'none'} />
           </View>
           <View
               style={{
