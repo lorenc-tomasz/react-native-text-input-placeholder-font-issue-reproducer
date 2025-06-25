@@ -15,16 +15,13 @@ import {
   View,
 } from 'react-native';
 
-import {
-  Colors,
-} from 'react-native/Libraries/NewAppScreen';
 import CustomTextInput from "./TextInput";
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+    backgroundColor: isDarkMode ? 'black' : 'white',
   };
 
   /*
@@ -48,7 +45,7 @@ function App(): React.JSX.Element {
         style={backgroundStyle}>
         <View
           style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
+            backgroundColor: isDarkMode ? 'black' : 'white',
             paddingHorizontal: safePadding,
             paddingTop: safePadding,
             paddingBottom: safePadding,
@@ -65,7 +62,7 @@ function App(): React.JSX.Element {
         </View>
           <View
               style={{
-                  backgroundColor: isDarkMode ? Colors.black : Colors.white,
+                  backgroundColor: isDarkMode ? 'black' : 'white',
                   paddingHorizontal: safePadding,
                   paddingTop: safePadding,
                   paddingBottom: safePadding,
@@ -82,7 +79,7 @@ function App(): React.JSX.Element {
           </View>
           <View
               style={{
-                  backgroundColor: isDarkMode ? Colors.black : Colors.white,
+                  backgroundColor: isDarkMode ? 'black' : 'white',
                   paddingHorizontal: safePadding,
                   paddingTop: safePadding,
                   paddingBottom: safePadding,
@@ -100,7 +97,7 @@ function App(): React.JSX.Element {
           </View>
           <View
               style={{
-                  backgroundColor: isDarkMode ? Colors.black : Colors.white,
+                  backgroundColor: isDarkMode ? 'black' : 'white',
                   paddingHorizontal: safePadding,
                   paddingTop: safePadding,
                   paddingBottom: safePadding,
