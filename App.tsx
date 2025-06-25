@@ -50,15 +50,26 @@ function App(): React.JSX.Element {
             paddingTop: safePadding,
             paddingBottom: safePadding,
           }}>
+          <TextInput style={{
+            height: 60,
+            borderColor: 'gray',
+            borderWidth: 1,
+            marginBottom: 20,
+            fontFamily: 'DancingScript',
+            fontWeight: '400',
+            fontSize: 20,
+            color: 'black',
+          }} placeholder={"DancingScript..."} autoCapitalize={'none'} placeholderTextColor={"red"}/>
             <TextInput style={{
                 height: 60,
                 borderColor: 'gray',
                 borderWidth: 1,
                 marginBottom: 20,
                 fontFamily: 'Roboto',
+              fontWeight: '400',
                 fontSize: 20,
                 color: 'black',
-            }} placeholder={"Search..."} placeholderTextColor={"red"} />
+            }} placeholder={"Search2..."} placeholderTextColor={"red"} />
         </View>
           <View
               style={{
@@ -72,7 +83,8 @@ function App(): React.JSX.Element {
                   borderColor: 'gray',
                   borderWidth: 1,
                   marginBottom: 20,
-                  fontFamily: 'Roboto-Regular',
+                  fontFamily: 'Roboto',
+                  fontWeight: '400',
                   fontSize: 20,
                   color: 'black',
               }} placeholder={"Search..."} placeholderTextColor={"red"} />
@@ -89,7 +101,7 @@ function App(): React.JSX.Element {
                   borderColor: 'gray',
                   borderWidth: 1,
                   marginBottom: 20,
-                  fontFamily: 'Roboto',
+                  fontFamily: 'Roboto-Regular',
                   fontWeight: '400',
                   fontSize: 20,
                   color: 'black',
