@@ -69,7 +69,7 @@ function App(): React.JSX.Element {
               fontWeight: '400',
                 fontSize: 20,
                 color: 'black',
-            }} placeholder={"Search2..."} placeholderTextColor={"red"} />
+            }} placeholder={"Roboto 1..."} placeholderTextColor={"red"} />
         </View>
           <View
               style={{
@@ -87,7 +87,7 @@ function App(): React.JSX.Element {
                   fontWeight: '400',
                   fontSize: 20,
                   color: 'black',
-              }} placeholder={"Search autoCapitalize..."} placeholderTextColor={"red"} autoCapitalize={'none'} />
+              }} placeholder={"Roboto autoCapitalize..."} placeholderTextColor={"red"} autoCapitalize={'none'} />
           </View>
           <View
               style={{
@@ -105,7 +105,7 @@ function App(): React.JSX.Element {
               fontWeight: '400',
               fontSize: 20,
               color: 'black',
-            }} placeholder={"Search 3 ..."} placeholderTextColor={"red"} />
+            }} placeholder={"Roboto 2 ..."} placeholderTextColor={"red"} />
             <TextInput style={{
               height: 60,
               borderColor: 'gray',
@@ -114,7 +114,7 @@ function App(): React.JSX.Element {
               fontFamily: 'Roboto-Regular',
               fontSize: 20,
               color: 'black',
-            }} placeholder={"Search 4..."} placeholderTextColor={"red"} />
+            }} placeholder={"Roboto 4..."} placeholderTextColor={"red"} />
               <CustomTextInput style={{
                   height: 60,
                   borderColor: 'gray',
@@ -124,7 +124,7 @@ function App(): React.JSX.Element {
                   fontWeight: '400',
                   fontSize: 20,
                   color: 'black',
-              }} placeholder={"Custom search..."} placeholderTextColor={"red"} />
+              }} placeholder={"Custom text input roboto..."} placeholderTextColor={"red"} />
           </View>
           <View
               style={{
@@ -142,7 +142,7 @@ function App(): React.JSX.Element {
                   fontWeight: '400',
                   fontSize: 20,
                   color: 'black',
-              }} placeholder={"DancingScript..."} autoCapitalize={'none'} placeholderTextColor={"red"}/>
+              }} placeholder={"DancingScript 2..."} autoCapitalize={'none'} placeholderTextColor={"red"}/>
           </View>
       </ScrollView>
     </View>
